@@ -1,0 +1,9 @@
+*.html
+*.png
+output.xml
+debug.log
+*.exe
+*.idea
+junit.xml
+webadmin/gen_user.robot
+data

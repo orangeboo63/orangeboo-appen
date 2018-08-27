@@ -7,3 +7,4 @@ debug.log
 junit.xml
 webadmin/gen_user.robot
 data
+.idea/*.xml

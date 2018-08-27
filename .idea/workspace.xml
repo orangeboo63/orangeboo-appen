@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98660780-36ac-40c4-9167-9d4f767020bf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/orangeboo-appen.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/orangeboo-appen.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resource.appen.robot" beforeDir="false" afterPath="$PROJECT_DIR$/Resource.appen.robot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToxicWord.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ToxicWord.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthyWord.txt" beforeDir="false" afterPath="$PROJECT_DIR$/HealthyWord.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appen.run.robot" beforeDir="false" afterPath="$PROJECT_DIR$/appen.run.robot" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +28,8 @@
       <file leaf-file-name="appen.run.robot" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/appen.run.robot">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="60" selection-start-line="10" selection-start-column="60" selection-end-line="10" selection-end-column="60" />
+            <state relative-caret-position="272">
+              <caret line="91" column="4" selection-start-line="91" selection-start-column="4" selection-end-line="91" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -152,8 +150,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/appen.run.robot">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="60" selection-start-line="10" selection-start-column="60" selection-end-line="10" selection-end-column="60" />
+        <state relative-caret-position="272">
+          <caret line="91" column="4" selection-start-line="91" selection-start-column="4" selection-end-line="91" selection-end-column="4" />
         </state>
       </provider>
     </entry>

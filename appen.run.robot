@@ -70,6 +70,7 @@ Is Content Toxic
     :For    ${line}     IN      @{toxic_text}
     \   Log     ${line}
     \   ${status}=     run keyword and return status       should contain      ${text}     ${line}
+    \   Exit For Loop If        ${status}
 
     ${status_toxic}=    set variable if     ${status}     Toxic
 
@@ -87,6 +88,8 @@ Is Content Healthy
     :For    ${line}     IN      @{healthy_text}
     \   Log     ${line}
     \   ${status}=     run keyword and return status       should contain      ${text}     ${line}
+    \   Exit For Loop If        ${status}
+    
     ${status_healthy}=    set variable if     ${status}     Healthy
 
     [Return]    ${status_healthy}

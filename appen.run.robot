@@ -89,7 +89,7 @@ Is Content Healthy
     \   Log     ${line}
     \   ${status}=     run keyword and return status       should contain      ${text}     ${line}
     \   Exit For Loop If        ${status}
-    
+
     ${status_healthy}=    set variable if     ${status}     Healthy
 
     [Return]    ${status_healthy}

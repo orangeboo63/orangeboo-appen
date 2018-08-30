@@ -46,25 +46,25 @@ Run
 
     [Teardown]      close browser
 
-TestContain
-    open browser                        ${url1}     Chrome
-    Maximize Browser Window
-    wait until element is visible       css=${email}
-    wait until element is visible       css=${input_password}
-    input text                          css=${email}        ${username}
-    input text                          css=${input_password}        ${password}
-    click element                       css=${login_btn}
-    sleep  2s
-    go to                               ${url2}
-    wait until element is visible       css=${body_page}
-    wait until element is visible       css=${just_go_btn}
-    click element                       css=${just_go_btn}
-    wait until element is visible       css=${review_page}
-    wait until element is visible       ${submit_btn}
-    sleep   2s
-    Select Toxic In Image Yes Imagery In The Image    Toxic
-
-    [Teardown]      close browser
+#TestContain
+#    open browser                        ${url1}     Chrome
+#    Maximize Browser Window
+#    wait until element is visible       css=${email}
+#    wait until element is visible       css=${input_password}
+#    input text                          css=${email}        ${username}
+#    input text                          css=${input_password}        ${password}
+#    click element                       css=${login_btn}
+#    sleep  2s
+#    go to                               ${url2}
+#    wait until element is visible       css=${body_page}
+#    wait until element is visible       css=${just_go_btn}
+#    click element                       css=${just_go_btn}
+#    wait until element is visible       css=${review_page}
+#    wait until element is visible       ${submit_btn}
+#    sleep   2s
+#    Select Toxic In Image Yes Imagery In The Image    Toxic
+#
+#    [Teardown]      close browser
 
 *** Keywords ***
 Verify Content
@@ -154,5 +154,5 @@ Evaluate Text From Image
     \   ${status}=     run keyword and return status       should contain      ${text}     ${line}
     \   Exit For Loop If        ${status}
 
-    run keyword if          ${status}       v
+    run keyword if          ${status}       Select Toxic In Image Yes Text Overlay In The Image     Toxic
     run keyword unless      ${status}       Select Toxic Neither At None

@@ -118,8 +118,7 @@ Select Toxicity Locate Link Preview Maybe
     capture page screenshot
 
 Select Toxicity Expressed Text Overlay
-    sleep  1s
-    Scroll Out From Bottom              ${toxic_locate_image_text_overlay}
+    Scroll Out From Bottom With Number      ${toxic_locate_image_text_overlay}   250
     click element                       ${toxic_locate_image_text_overlay}
     capture page screenshot
 

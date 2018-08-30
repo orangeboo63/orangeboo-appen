@@ -102,7 +102,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-12" />
     <option name="y" value="48" />
     <option name="width" value="1944" />
@@ -198,7 +198,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< Updated upstream
     <frame x="-7" y="33" width="1295" height="695" extended-state="6" />
+=======
+    <frame x="-7" y="23" width="1295" height="704" extended-state="7" />
+>>>>>>> Stashed changes
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />

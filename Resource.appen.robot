@@ -125,12 +125,12 @@ Select Toxicity Expressed Text Overlay
 
 Select Toxicity Expressed Using Imagery
     sleep  1s
-    Scroll Out From Bottom              ${toxic_locate_image_imagery}
+    Scroll Out From Bottom With Number      ${toxic_locate_image_imagery}     250
     click element                       ${toxic_locate_image_imagery}
     capture page screenshot
 
 Select Toxicity Where Located In The Image
-    Scroll Out From Bottom              ${toxic_locate_image_in_the_image}
+    Scroll Out From Bottom With Number      ${toxic_locate_image_in_the_image}      300
     click element                       ${toxic_locate_image_in_the_image}
     capture page screenshot
 
@@ -236,11 +236,11 @@ Scroll Out From Bottom
     ${scrollTo}=        Evaluate                ${axis_y}+150
     Execute Javascript                  window.scrollTo(0,${scrollTo})
 
-Scroll Out From Bottom2
-    [Arguments]     ${element}
+Scroll Out From Bottom With Number
+    [Arguments]     ${element}      ${number}
 
     Assign Id To Element                ${element}        tempID
     Execute Javascript                  document.getElementById('tempID').scrollIntoView()
     ${axis_y}=          Execute Javascript      return window.scrollY
-    ${scrollTo}=        Evaluate                ${axis_y}+200
+    ${scrollTo}=        Evaluate                ${axis_y}+${number}
     Execute Javascript                  window.scrollTo(0,${scrollTo})

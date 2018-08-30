@@ -3,6 +3,7 @@ Library				SeleniumLibrary
 Library 			String
 Library             DateTime
 Library             OperatingSystem
+Library             pytesseract
 Resource            Resource.appen.robot
 
 *** Test Cases ***
@@ -34,7 +35,7 @@ Run
     \   random sleep
     \   Select Demonization None
     \   random sleep
-    \   Verify Content
+    \   Verify Content                  ${screen_dir}   ${i}
     \   random sleep
     \   Click Submit
     \   random sleep
@@ -45,18 +46,33 @@ Run
 
     [Teardown]      close browser
 
-#Test Contain
-#    ${text}=        Set variable    ลองเล่นออนไลน์กัน
-#    ${line}=        Set variable    บอลออนไลน์
-#    ${status}=     run keyword and return status       should contain      ${text}     ${line}
-#    log         ${status}
+TestContain
+    open browser                        ${url1}     Chrome
+    Maximize Browser Window
+    wait until element is visible       css=${email}
+    wait until element is visible       css=${input_password}
+    input text                          css=${email}        ${username}
+    input text                          css=${input_password}        ${password}
+    click element                       css=${login_btn}
+    sleep  2s
+    go to                               ${url2}
+    wait until element is visible       css=${body_page}
+    wait until element is visible       css=${just_go_btn}
+    click element                       css=${just_go_btn}
+    wait until element is visible       css=${review_page}
+    wait until element is visible       ${submit_btn}
+    sleep   2s
+    Select Toxic In Image Yes Imagery In The Image    Toxic
+
+    [Teardown]      close browser
 
 *** Keywords ***
 Verify Content
+    [Arguments]     ${dir}      ${index}
     ${show_text}=    run keyword and return status    element should be visible      ${text_to_review}
 
     run keyword if      ${show_text}      Evaluate Category
-    run keyword unless  ${show_text}      Select Toxic Neither At None
+    run keyword unless  ${show_text}      Evaluate Text From Image      ${dir}    ${index}
 
 Is Content Toxic
     ${toxic_file}=      get file        ToxicWord.txt
@@ -94,6 +110,24 @@ Is Content Healthy
 
     [Return]    ${status_healthy}
 
+Is Image Toxic
+    ${toxic_file}=      get file        ToxicWord.txt
+    @{toxic_text}=      split to lines  ${toxic_file}
+    ${count}=           get length      ${toxic_text}
+
+    ${status}=          set variable    False
+    ${text}=            get text       ${text_to_review}
+    Log     ${text}
+
+    :For    ${line}     IN      @{toxic_text}
+    \   Log     ${line}
+    \   ${status}=     run keyword and return status       should contain      ${text}     ${line}
+    \   Exit For Loop If        ${status}
+
+    ${status_toxic}=    set variable if     ${status}     Toxic
+
+    [Return]    ${status_toxic}
+
 Evaluate Category
     ${content_toxic}=       Is Content Toxic
     ${content_healthy}=     Is Content Healthy
@@ -102,4 +136,23 @@ Evaluate Category
     ...     ELSE IF     '${content_healthy}'=='Healthy'     Select Toxic In Text Yes    Healthy
     ...     ELSE        Select Toxic Neither At None
 
+Evaluate Text From Image
+    [Arguments]     ${dir}     ${img_index}
 
+    ${file_to_read}=    set variable            ${dir}${/}content-${img_index}.png
+    ${text}=            image to string         ${file_to_read}      lang=tha
+
+    ${toxic_file}=      get file        ToxicWord.txt
+    @{toxic_text}=      split to lines  ${toxic_file}
+    ${count}=           get length      ${toxic_text}
+
+    ${status}=          set variable    False
+    Log     ${text}
+
+    :For    ${line}     IN      @{toxic_text}
+    \   Log     ${line}
+    \   ${status}=     run keyword and return status       should contain      ${text}     ${line}
+    \   Exit For Loop If        ${status}
+
+    run keyword if          ${status}       v
+    run keyword unless      ${status}       Select Toxic Neither At None

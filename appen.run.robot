@@ -29,6 +29,7 @@ Run
     click element                       css=${just_go_btn}
 
     :For    ${i}    IN RANGE        1   51
+    \   log to console                      ${i}
     \   wait until element is visible       css=${review_page}
     \   wait until element is visible       ${submit_btn}
     \   capture page screenshot             filename=content-{index}.png

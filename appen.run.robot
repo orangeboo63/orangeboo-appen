@@ -155,5 +155,5 @@ Evaluate Text From Image
     \   ${status}=     run keyword and return status       should contain      ${text}     ${line}
     \   Exit For Loop If        ${status}
 
-    run keyword if          ${status}       Select Toxic In Image Yes Text Overlay In The Image     Toxic
+    run keyword if          ${status}       Select Toxic In Image Maybe Text Overlay In The Image     Toxic
     run keyword unless      ${status}       Select Toxic Neither At None

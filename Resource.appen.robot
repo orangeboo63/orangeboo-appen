@@ -183,6 +183,17 @@ Select Toxic In Image Yes Text Overlay In The Image
     Select Toxicity Where Located In The Image
     random sleep
 
+Select Toxic In Image Maybe Text Overlay In The Image
+    [Arguments]     ${toxicity}
+
+    run keyword if  '${toxicity}'=='Toxic'      Select Toxicity Toxic
+    run keyword if  '${toxicity}'=='Healthy'    Select Toxicity Healthy
+    random sleep
+    Select Toxicity Locate Image Video Maybe
+    Select Toxicity Expressed Text Overlay
+    Select Toxicity Where Located In The Image
+    random sleep
+
 Select Toxic In Image Yes Imagery In The Image
     [Arguments]     ${toxicity}
 

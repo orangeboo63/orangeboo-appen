@@ -103,7 +103,7 @@ Select Toxicity Locate Image Video Yes
     capture page screenshot
 
 Select Toxicity Locate Image Video Maybe
-    Scroll Out From Bottom              ${toxic_locate_image_video_maybe}
+    Scroll Out From Bottom With Number              ${toxic_locate_image_video_maybe}   250
     click element                       ${toxic_locate_image_video_maybe}
     capture page screenshot
 
@@ -124,7 +124,7 @@ Select Toxicity Expressed Text Overlay
 
 Select Toxicity Expressed Using Imagery
     sleep  1s
-    Scroll Out From Bottom With Number      ${toxic_locate_image_imagery}     250
+    Scroll Out From Bottom With Number      ${toxic_locate_image_imagery}     280
     click element                       ${toxic_locate_image_imagery}
     capture page screenshot
 
@@ -151,6 +151,7 @@ Select Toxicity Where Located Begin Of Video
 Select Toxic Neither At None
     Select Toxicity Neither
     random sleep
+    log to console      Select Toxic Neither At None
     Select Toxicity Locate None
     random sleep
 
@@ -160,6 +161,7 @@ Select Toxic In Text Yes
     run keyword if  '${toxicity}'=='Toxic'      Select Toxicity Toxic
     run keyword if  '${toxicity}'=='Healthy'    Select Toxicity Healthy
     random sleep
+    log to console      Select Toxic In Text Yes - ${toxicity}
     Select Toxicity Locate Text Yes
     random sleep
 
@@ -178,6 +180,7 @@ Select Toxic In Image Yes Text Overlay In The Image
     run keyword if  '${toxicity}'=='Toxic'      Select Toxicity Toxic
     run keyword if  '${toxicity}'=='Healthy'    Select Toxicity Healthy
     random sleep
+    Log to console          Select Toxic In Image Yes Text Overlay In The Image - ${toxicity}
     Select Toxicity Locate Image Video Yes
     Select Toxicity Expressed Text Overlay
     Select Toxicity Where Located In The Image
@@ -189,6 +192,7 @@ Select Toxic In Image Maybe Text Overlay In The Image
     run keyword if  '${toxicity}'=='Toxic'      Select Toxicity Toxic
     run keyword if  '${toxicity}'=='Healthy'    Select Toxicity Healthy
     random sleep
+    log to console          Select Toxic In Image Maybe Text Overlay In The Image - ${toxicity}
     Select Toxicity Locate Image Video Maybe
     Select Toxicity Expressed Text Overlay
     Select Toxicity Where Located In The Image

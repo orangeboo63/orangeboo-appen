@@ -48,6 +48,9 @@ Run
     [Teardown]      close browser
 
 #TestContain
+#    ${current_time}=    Get Current Date    result_format=%Y%m%d_%H%M%S
+#    ${screen_dir}=      set variable    ${CURDIR}${/}data${/}Screen${current_time}
+#    set screenshot directory            ${screen_dir}
 #    open browser                        ${url1}     Chrome
 #    Maximize Browser Window
 #    wait until element is visible       css=${email}
@@ -60,10 +63,11 @@ Run
 #    wait until element is visible       css=${body_page}
 #    wait until element is visible       css=${just_go_btn}
 #    click element                       css=${just_go_btn}
-#    wait until element is visible       css=${review_page}
-#    wait until element is visible       ${submit_btn}
-#    sleep   2s
-#    Select Toxic In Image Maybe Text Overlay In The Image    Toxic
+#    capture page screenshot             filename=content-{index}.png
+#    random sleep
+#    Select Demonization None
+#    random sleep
+#    Evaluate Text From Image            ${screen_dir}   1
 #
 #    [Teardown]      close browser
 

@@ -118,7 +118,7 @@ Select Toxicity Locate Link Preview Maybe
     capture page screenshot
 
 Select Toxicity Expressed Text Overlay
-    Scroll Out From Bottom With Number      ${toxic_locate_image_text_overlay}   350
+    Scroll Out From Bottom With Number      ${toxic_locate_image_text_overlay}   550
     click element                       ${toxic_locate_image_text_overlay}
     capture page screenshot
 
@@ -129,7 +129,7 @@ Select Toxicity Expressed Using Imagery
     capture page screenshot
 
 Select Toxicity Where Located In The Image
-    Scroll Out From Bottom With Number      ${toxic_locate_image_in_the_image}      400
+    Scroll Out From Bottom With Number      ${toxic_locate_image_in_the_image}      670
     click element                       ${toxic_locate_image_in_the_image}
     capture page screenshot
 
@@ -195,6 +195,7 @@ Select Toxic In Image Maybe Text Overlay In The Image
     run keyword if  '${toxicity}'=='Healthy'    Select Toxicity Healthy
     random sleep
     log to console          Select Toxic In Image Maybe Text Overlay In The Image - ${toxicity}
+    Select Toxicity Locate Image Video Maybe
     sleep   2s
     Select Toxicity Expressed Text Overlay
     sleep   1s

@@ -63,7 +63,7 @@ Run
 #    wait until element is visible       css=${review_page}
 #    wait until element is visible       ${submit_btn}
 #    sleep   2s
-#    Select Toxic In Image Yes Imagery In The Image    Toxic
+#    Select Toxic In Image Maybe Text Overlay In The Image    Toxic
 #
 #    [Teardown]      close browser
 

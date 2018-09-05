@@ -3,6 +3,8 @@ Library				SeleniumLibrary
 Library 			String
 Library             DateTime
 Library             Collections
+Library             OperatingSystem
+Library             capture.Capture
 
 *** Variables ***
 ${url1}                 https://srt.facebook.com/login/?email=porntiwa.chokdumrongsook%40fb.appen.com
@@ -241,6 +243,10 @@ Random Sleep
     #${time}=    Evaluate    random.sample(range(1, 2), 1)    random
     ${time_to_sleep}=     get from list        ${time}      0
     sleep       ${time_to_sleep}s
+
+Crop Image
+    [Arguments]     ${out_dir}     ${filename}
+    crop only photo      ${out_dir}   ${filename}      20  120      400     500
 
 Scroll Height
     Execute JavaScript				window.scrollTo(0, document.body.scrollHeight)

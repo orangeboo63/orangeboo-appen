@@ -145,7 +145,7 @@ Evaluate Text From Image
     [Arguments]     ${dir}     ${img_index}
 
     ${file_to_read}=    set variable            ${dir}${/}content-${img_index}.png
-    Crop Image          ${dir}      ${/}content-${img_index}.png
+    Crop Image          ${dir}                  ${file_to_read}
     ${text}=            image to string         ${file_to_read}      lang=tha
 
     ${toxic_file}=      get file        ToxicWord.txt

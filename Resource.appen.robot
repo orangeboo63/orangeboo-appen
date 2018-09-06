@@ -265,7 +265,7 @@ Crop Image
     crop only photo      ${out_dir}   ${filename}      20  120      400     500
 
 Evaluate Image
-    [Arguments]     ${out_dir}     ${img1}  ${img2}
+    [Arguments]     ${img1}  ${img2}
     ${result}=  compare image   ${OUTPUT_DIR}   ${img1}     ${img2}
     ${min}=     set variable    0.0
     ${max}=     set variable    0.4

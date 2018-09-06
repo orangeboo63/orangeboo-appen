@@ -165,8 +165,6 @@ Evaluate Text From Image
 Evaluate By Compare Image
     [Arguments]     ${dir}      ${file_to_compare}
 
-    Crop Image      ${dir}     ${file_to_compare}
-
     ${count}=       Count Files In Directory    ${toxic_image_folder}
 
     :For    ${i}    IN RANGE    1   ${count}+1

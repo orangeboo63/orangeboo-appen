@@ -8,3 +8,4 @@ junit.xml
 webadmin/gen_user.robot
 data
 *.xml
+*.pyc

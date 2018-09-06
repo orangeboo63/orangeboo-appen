@@ -74,10 +74,11 @@ Run
 *** Keywords ***
 Verify Content
     [Arguments]     ${dir}      ${index}
-    ${show_text}=    run keyword and return status    element should be visible      ${text_to_review}
+    ${show_text}=       run keyword and return status    element should be visible      ${text_to_review}
+    ${image_file}=      set variable      ${dir}${/}content-${index}.png
 
-    run keyword if      ${show_text}      Evaluate Category
-    run keyword unless  ${show_text}      Evaluate Text From Image      ${dir}    ${index}
+    run keyword if      ${show_text}      Evaluate Category From Text
+    run keyword unless  ${show_text}      Evaluate Category From Image      ${dir}      ${image_file}
 
 Is Content Toxic
     ${toxic_file}=      get file        ToxicWord.txt
@@ -133,7 +134,7 @@ Is Image Toxic
 
     [Return]    ${status_toxic}
 
-Evaluate Category
+Evaluate Category From Text
     ${content_toxic}=       Is Content Toxic
     ${content_healthy}=     Is Content Healthy
 
@@ -142,10 +143,9 @@ Evaluate Category
     ...     ELSE        Select Toxic Neither At None
 
 Evaluate Text From Image
-    [Arguments]     ${dir}     ${img_index}
+    [Arguments]     ${dir}      ${file_to_read}
 
-    ${file_to_read}=    set variable            ${dir}${/}content-${img_index}.png
-    Crop Image          ${dir}                  ${file_to_read}
+    Crop Image          ${dir}       ${file_to_read}
     ${text}=            image to string         ${file_to_read}      lang=tha
 
     ${toxic_file}=      get file        ToxicWord.txt
@@ -160,5 +160,27 @@ Evaluate Text From Image
     \   ${status}=     run keyword and return status       should contain      ${text}     ${line}
     \   Exit For Loop If        ${status}
 
-    run keyword if          ${status}       Select Toxic In Image Maybe Text Overlay In The Image     Toxic
-    run keyword unless      ${status}       Select Toxic Neither At None
+    ${content_toxic_text}=  set variable if     ${status}   Toxic
+
+Evaluate By Compare Image
+    [Arguments]     ${dir}      ${file_to_compare}
+
+    Crop Image      ${dir}     ${file_to_compare}
+
+    ${count}=       Count Files In Directory    ${toxic_image_folder}
+
+    :For    ${i}    IN RANGE    1   ${count}+1
+    \   ${isImageSimilar}=      Evaluate Image       ${file_to_compare}      ${toxic_image_folder}/${i}.png
+    \   exit for loop if        '${isImageSimilar}'=='similar'
+
+    ${content_toxic_image}=  set variable if     '${isImageSimilar}'=='similar'   Toxic
+
+Evaluate Category From Image
+    [Arguments]     ${dir}      ${image_file}
+
+    ${content_toxic_text}=      Evaluate Text From Image        ${dir}      ${image_file}
+    ${content_toxic_image}=     Evaluate By Compare Image       ${dir}      ${image_file}
+
+    run keyword if      '${content_toxic_text}'=='Toxic'     Select Toxic In Image Maybe Text Overlay In The Image    Toxic
+    ...     ELSE IF     '${content_toxic_image}'=='Toxic'    Select Toxic In Image Maybe Text Overlay In The Image    Toxic
+    ...     ELSE        Select Toxic Neither At None

@@ -1,35 +1,42 @@
 *** Settings ***
 Library     SeleniumLibrary
+Library     OperatingSystem
 Library     capture.Capture
-Resource     Selenium2Screenshots/keywords.robot
+Library     capture.Compare
+Library     pytesseract
 Resource    Resource.appen.robot
 
 *** Test Cases ***
-capture
-    open browser                        ${url1}     Chrome
-    Maximize Browser Window
-    wait until element is visible       css=${email}
-    wait until element is visible       css=${input_password}
-    input text                          css=${email}        ${username}
-    input text                          css=${input_password}        ${password}
-    click element                       css=${login_btn}
-    sleep  2s
-    go to                               ${url2}
-    wait until element is visible       css=${body_page}
-    wait until element is visible       css=${just_go_btn}
-    click element                       css=${just_go_btn}
-    wait until element is visible       css=${review_page}
-    wait until element is visible       ${submit_btn}
+compare
+    ${img1}=    set variable  ${CURDIR}${/}test-content-31-1.png
+    ${img2}=    set variable  ${CURDIR}${/}test-content-31-Detail.png
 
-    #open browser                        https://ampos1-qa.ampostech.com     chrome
-    #capture page screenshot
-    Bootstrap jQuery
-    JQuery Should Be Loaded
-    #Capture and crop page screenshot    test82.png       ${image_to_review}
-    Capture and crop page screenshot    test83.png       css=div.logo
-
-    [Teardown]  close browser
+    ${result}=  compare image   ${OUTPUT_DIR}   ${img1}     ${img2}
+    log to console      ${result}
 
 capture2
-    ${img}=     Set Variable   ${CURDIR}${/}test-content-31.png
+    ${img}=     Set Variable   ${CURDIR}${/}content-23.png
     crop only photo      ${OUTPUT_DIR}   ${img}      20  120      400     500
+    ${text}=            image to string         ${img}      lang=tha
+
+test
+    ${result}=      Set Variable    0.39
+    ${min}=     Set Variable    0.0
+    ${max}=     Set Variable    0.4
+
+    #${similar}=     run keyword and return status      should be true   ${min} < ${result} < ${max}
+    #log to console      ${similar}
+
+    run keyword if      ${min} <= ${result} <= ${max}     log to console      Pass
+
+test2
+    ${file_to_compare}=     set variable        ${CURDIR}${/}test-content-11.png
+    Crop Image              ${CURDIR}              ${file_to_compare}
+
+    ${count}=       Count Files In Directory    ${toxic_image_folder}
+
+    :For    ${i}    IN RANGE    1   ${count}+1
+    \   ${isImageSimilar}=      Evaluate Image    ${OUTPUT_DIR}   ${file_to_compare}      ${toxic_image_folder}/${i}.png
+    #\   exit for loop if        '${isImageSimilar}'=='similar'
+
+    log to console          ${isImageSimilar}

@@ -5,6 +5,7 @@ Library             DateTime
 Library             Collections
 Library             OperatingSystem
 Library             capture.Capture
+Library             capture.Compare
 
 *** Variables ***
 ${url1}                 https://srt.facebook.com/login/?email=porntiwa.chokdumrongsook%40fb.appen.com
@@ -50,6 +51,9 @@ ${toxic_locate_image_in_the_image}      xpath=(//b[text()='Where is the Healthy 
 ${toxic_locate_image_video_thumbnail}   xpath=(//b[text()='Where is the Healthy or Toxic located? (Choose all that apply.)']/../..//div//span)[2]
 ${toxic_locate_image_end_video}         xpath=(//b[text()='Where is the Healthy or Toxic located? (Choose all that apply.)']/../..//div//span)[3]
 ${toxic_locate_image_begin_video}       xpath=(//b[text()='Where is the Healthy or Toxic located? (Choose all that apply.)']/../..//div//span)[4]
+
+# For comparison
+${toxic_image_folder}                   ${CURDIR}/image_for_compare/Toxic
 
 *** Keywords ***
 Click Submit
@@ -125,8 +129,7 @@ Select Toxicity Expressed Text Overlay
     capture page screenshot
 
 Select Toxicity Expressed Using Imagery
-    sleep  1s
-    Scroll Out From Bottom With Number      ${toxic_locate_image_imagery}     280
+    Scroll Out From Bottom With Number      ${toxic_locate_image_imagery}     550
     click element                       ${toxic_locate_image_imagery}
     capture page screenshot
 
@@ -215,6 +218,19 @@ Select Toxic In Image Yes Imagery In The Image
     Select Toxicity Where Located In The Image
     random sleep
 
+Select Toxic In Image Maybe Imagery In The Image
+    [Arguments]     ${toxicity}
+
+    run keyword if  '${toxicity}'=='Toxic'      Select Toxicity Toxic
+    run keyword if  '${toxicity}'=='Healthy'    Select Toxicity Healthy
+    random sleep
+    Select Toxicity Locate Image Video Maybe
+    sleep   2s
+    Select Toxicity Expressed Using Imagery
+    sleep   1s
+    Select Toxicity Where Located In The Image
+    random sleep
+
 Select Toxic In Image Yes Imagery In Video Thumbnail
     [Arguments]     ${toxicity}
 
@@ -247,6 +263,16 @@ Random Sleep
 Crop Image
     [Arguments]     ${out_dir}     ${filename}
     crop only photo      ${out_dir}   ${filename}      20  120      400     500
+
+Evaluate Image
+    [Arguments]     ${out_dir}     ${img1}  ${img2}
+    ${result}=  compare image   ${OUTPUT_DIR}   ${img1}     ${img2}
+    ${min}=     set variable    0.0
+    ${max}=     set variable    0.4
+
+    ${similar}=    set variable if     ${min} <= ${result} <= ${max}   similar
+
+    [Return]        ${similar}
 
 Scroll Height
     Execute JavaScript				window.scrollTo(0, document.body.scrollHeight)

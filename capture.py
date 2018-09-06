@@ -18,3 +18,13 @@ class Capture:
 
         with open(os.path.join(output_dir, filename), 'wb') as output:
             area2.save(output, 'png')
+
+class Compare:
+
+    def compare_image(self, output_dir, image1, image2):
+
+        from diffimg import diff
+
+        result = diff(image1, image2)
+
+        return result

@@ -3,7 +3,7 @@ Library				SeleniumLibrary
 Library 			String
 Library             DateTime
 Library             OperatingSystem
-Library             pytesseract
+Library             google_vision.ocr_google
 Resource            Resource.appen.robot
 
 *** Test Cases ***
@@ -146,7 +146,7 @@ Evaluate Text From Image
     [Arguments]     ${dir}      ${file_to_read}
 
     Crop Image          ${dir}       ${file_to_read}
-    ${text}=            image to string         ${file_to_read}      lang=tha
+    ${text}=            Text From Image         ${file_to_read}
 
     ${toxic_file}=      get file        ToxicWord.txt
     @{toxic_text}=      split to lines  ${toxic_file}

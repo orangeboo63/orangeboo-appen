@@ -255,8 +255,8 @@ Select Toxic In Image Yes Imagery In Video
     random sleep
 
 Random Sleep
-    ${time}=    Evaluate    random.sample(range(2, 7), 1)    random
-    #${time}=    Evaluate    random.sample(range(1, 2), 1)    random
+    #${time}=    Evaluate    random.sample(range(2, 7), 1)    random
+    ${time}=    Evaluate    random.sample(range(10, 15), 1)    random
     ${time_to_sleep}=     get from list        ${time}      0
     sleep       ${time_to_sleep}s
 

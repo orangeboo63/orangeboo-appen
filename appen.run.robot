@@ -160,7 +160,9 @@ Evaluate Text From Image
     \   ${status}=     run keyword and return status       should contain      ${text}     ${line}
     \   Exit For Loop If        ${status}
 
-    ${content_toxic_text}=  set variable if     ${status}   Toxic
+    ${status_toxic_text}=  set variable if     ${status}   Toxic
+
+    [Return]    ${status_toxic_text}
 
 Evaluate By Compare Image
     [Arguments]     ${dir}      ${file_to_compare}
@@ -171,7 +173,9 @@ Evaluate By Compare Image
     \   ${isImageSimilar}=      Evaluate Image       ${file_to_compare}      ${toxic_image_folder}/${i}.png
     \   exit for loop if        '${isImageSimilar}'=='similar'
 
-    ${content_toxic_image}=  set variable if     '${isImageSimilar}'=='similar'   Toxic
+    ${status_toxic_image}=  set variable if     '${isImageSimilar}'=='similar'   Toxic
+
+    [Return]    ${status_toxic_image}
 
 Evaluate Category From Image
     [Arguments]     ${dir}      ${image_file}

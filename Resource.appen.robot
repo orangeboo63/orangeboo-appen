@@ -21,7 +21,7 @@ ${body_page}            body.UIInternPage
 ${just_go_btn}          a[href*='intern/review/queue/endless']
 
 ${review_page}          div[data-uibase-classes=':srt:job-container:view']
-${submit_btn}           //button[text()='Submit']
+${submit_btn}           //a[text()='Submit']
 ${dump_btn}             //div[text()='Dump and Exit']
 
 ${text_to_review}       //span[@data-uibase-classes=':xui:text']
@@ -256,7 +256,7 @@ Select Toxic In Image Yes Imagery In Video
 
 Random Sleep
     #${time}=    Evaluate    random.sample(range(2, 7), 1)    random
-    ${time}=    Evaluate    random.sample(range(7, 10), 1)    random
+    ${time}=    Evaluate    random.sample(range(7, 13), 1)    random
     ${time_to_sleep}=     get from list        ${time}      0
     sleep       ${time_to_sleep}s
 
@@ -268,7 +268,7 @@ Evaluate Image
     [Arguments]     ${img1}  ${img2}
     ${result}=  compare image   ${OUTPUT_DIR}   ${img1}     ${img2}
     ${min}=     set variable    0.0
-    ${max}=     set variable    0.4
+    ${max}=     set variable    0.25
 
     ${similar}=    set variable if     ${min} <= ${result} <= ${max}   similar
 

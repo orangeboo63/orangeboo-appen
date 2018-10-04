@@ -256,7 +256,7 @@ Select Toxic In Image Yes Imagery In Video
 
 Random Sleep
     #${time}=    Evaluate    random.sample(range(2, 7), 1)    random
-    ${time}=    Evaluate    random.sample(range(7, 13), 1)    random
+    ${time}=    Evaluate    random.sample(range(7, 14), 1)    random
     ${time_to_sleep}=     get from list        ${time}      0
     sleep       ${time_to_sleep}s
 
@@ -268,7 +268,7 @@ Evaluate Image
     [Arguments]     ${img1}  ${img2}
     ${result}=  compare image   ${OUTPUT_DIR}   ${img1}     ${img2}
     ${min}=     set variable    0.0
-    ${max}=     set variable    0.25
+    ${max}=     set variable    0.12
 
     ${similar}=    set variable if     ${min} <= ${result} <= ${max}   similar
 

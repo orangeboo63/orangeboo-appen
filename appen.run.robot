@@ -28,10 +28,10 @@ Run
     wait until element is visible       css=${just_go_btn}
     click element                       css=${just_go_btn}
 
-    :For    ${i}    IN RANGE        1   51
+    :For    ${i}    IN RANGE        1   201
     \   log to console                      ${i}
     \   wait until element is visible       css=${review_page}
-    \   wait until element is visible       ${submit_btn}
+    \   wait until element is visible       ${submit_btn}           600
     \   capture page screenshot             filename=content-{index}.png
     \   random sleep
     \   Select Demonization None
